@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	channelSample()
+	closingChannelsSample()
 }
 
 func goroutinesSample() {
@@ -46,4 +46,24 @@ func sum(numbers []int, channel chan int) {
 	}
 	time.Sleep(3000 * time.Millisecond)
 	channel <- sum // send sum of numbers to channel
+}
+
+func fibonacci(max int, channel chan int) {
+	x, y := 0, 1
+	for i := 0; i < max; i++ {
+		time.Sleep(1000 * time.Millisecond)
+		channel <- x
+		x, y = y, x+y
+	}
+	close(channel)
+}
+
+func closingChannelsSample() {
+	channel := make(chan int, 10)
+
+	go fibonacci(cap(channel), channel)
+
+	for value := range channel {
+		fmt.Println(value)
+	}
 }
