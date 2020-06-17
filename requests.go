@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -43,7 +44,10 @@ func server() {
 }
 
 func serverHandler() http.HandlerFunc {
+	var b = []byte{1, 2, 43, 54, 254, 44, 255, 58}
+
 	return http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
+		request.Write(io.MultiWriter(io.Writer(b)))
 		log.Println("Request Log >>", request.Host, request.Method)
 	})
 }
