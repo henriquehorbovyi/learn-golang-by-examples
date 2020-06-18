@@ -1,9 +1,10 @@
 package main
 
 import (
-	oss "./os-stuff"
+	oss "./osstuff"
 )
 
 func main() {
-	oss.TakePicture()
+	//oss.TakePicture()
+	oss.CLIArguments()
 }
