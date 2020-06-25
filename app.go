@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	//oss.TakePicture()
+	// oss.TakePicture()
 	oss.CLIArguments()
 }
