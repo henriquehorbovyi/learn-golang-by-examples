@@ -6,5 +6,5 @@ import (
 
 func main() {
 	// oss.TakePicture()
-	oss.CLIArguments()
+	oss.TaskProgress()
 }
