@@ -1,4 +1,4 @@
-package goroutines
+package main
 
 import (
 	"fmt"
@@ -62,4 +62,19 @@ func closingChannelsSample() {
 	for value := range channel {
 		fmt.Println(value)
 	}
+}
+
+func worker(isDone chan bool) {
+	fmt.Println("working...")
+	time.Sleep(1 * time.Second)
+	fmt.Println("Done!")
+	isDone <- true
+}
+
+func main() {
+	isDone := make(chan bool, 1)
+
+	go worker(isDone)
+
+	<-isDone
 }
